@@ -3,12 +3,13 @@ import { Link } from 'react-router-dom'
 import { getLocations } from '../hooks/useFetch'
 import Loading from './UI/Loading'
 import Error from './UI/Error'
-import { useState } from 'react'
+import { useLayoutEffect, useRef, useState } from 'react'
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa6'
+import { gsap } from 'gsap'
 
 function Locations() {
   const [currentPage, setCurrentPage] = useState(1)
-  const { isLoading, data, isError, error, isFetched } = useQuery(
+  const { status, data, error, isFetched } = useQuery(
     ['locations', currentPage], () => getLocations(currentPage))
   let info 
   let results
@@ -16,6 +17,33 @@ function Locations() {
     info = {...data.info}
     results = [...data.results]
   }
+
+  const locationsRef = useRef(null)
+  const ctx = useRef(null)
+
+  useLayoutEffect(() => {
+    if (status === 'success') {
+      ctx.current = gsap.context(() => {
+        const locations = gsap.utils.toArray('.location')
+        locations.map((location, i) => {
+          gsap.fromTo(
+            location,
+            {
+              opacity: 0,
+              y: 7
+            },
+            {
+              opacity: 1,
+              y: 0,
+              delay: .01 + (i / 10)
+            }
+          )
+        })
+      }, locationsRef)
+      return () => ctx.current.revert()
+    }
+  }, [status])
+
   const prevPage = (e) => {
     e.preventDefault()
     if (currentPage != 1) {
@@ -29,14 +57,14 @@ function Locations() {
   return (
     <>
       {
-        isLoading && <Loading />        
+        status === 'loading' && <Loading />
       }
       {
-        isError && <Error error={error} />
+        status === 'error' && <Error error={error} />
       }
-      <div className="locations">
+      <div className="locations" ref={locationsRef}>
         {
-          isFetched &&
+          status === 'success' &&
           results.map(result => (
             <Link to={`${result.id}`} className='location' key={result.id}>
               <div className="location__name">
@@ -47,7 +75,7 @@ function Locations() {
         }
       </div>
       {
-        isFetched &&
+        status === 'success' &&
         <div className="pagination">
           <ul>
             <li>

@@ -11,5 +11,5 @@ EN: [See online](https://diegokaiser.github.io/prt-rickandmorty/)
 
 ### TODO:
 
-- Animar elementos / Animate elements
+- Mostrar imagenes solo cuando han sido cargardas / Show avatars only when they are ready to show
 - Usar Vitest para realizar testing / Use Vitest for testing

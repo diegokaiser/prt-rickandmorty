@@ -16,7 +16,7 @@ function App() {
       <header className='header'>
         <div className="header__content">
           <div className="logo">
-            <Link to='/'>
+            <Link to='/prt-rickandmorty/'>
               <img src={logo} alt="Rick and Morty!" />
             </Link>
           </div>
@@ -24,7 +24,7 @@ function App() {
             <ul>
               <li>
                 <NavLink 
-                  to='/characters'
+                  to='/prt-rickandmorty/characters'
                   className={({ isActive }) =>
                     isActive ? "active" : ""
                   }
@@ -33,7 +33,7 @@ function App() {
               </li>
               <li>
                 <NavLink 
-                  to='/locations'
+                  to='/prt-rickandmorty/locations'
                   className={({ isActive }) =>
                     isActive ? "active" : ""
                   }
@@ -42,7 +42,7 @@ function App() {
               </li>
               <li>
                 <NavLink 
-                  to='/episodes'
+                  to='/prt-rickandmorty/episodes'
                   className={({ isActive }) =>
                     isActive ? "active" : ""
                   }
@@ -57,13 +57,13 @@ function App() {
       <div className="main">
         <div className="main__content">
           <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/characters' element={<Characters />} />
-            <Route path='/characters/:id' element={<Character />} />
-            <Route path='/locations' element={<Locations />} />
-            <Route path='/locations/:id' element={<Location />} />
-            <Route path='/episodes' element={<Episodes />} />
-            <Route path='/episodes/:id' element={<Episode />} />
+            <Route path='/prt-rickandmorty/' element={<Home />} />
+            <Route path='/prt-rickandmorty/characters' element={<Characters />} />
+            <Route path='/prt-rickandmorty/characters/:id' element={<Character />} />
+            <Route path='/prt-rickandmorty/locations' element={<Locations />} />
+            <Route path='/prt-rickandmorty/locations/:id' element={<Location />} />
+            <Route path='/prt-rickandmorty/episodes' element={<Episodes />} />
+            <Route path='/prt-rickandmorty/episodes/:id' element={<Episode />} />
           </Routes>
         </div>
       </div>

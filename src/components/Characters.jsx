@@ -3,12 +3,13 @@ import { Link } from 'react-router-dom'
 import { getCharacters } from './../hooks/useFetch'
 import Loading from './UI/Loading'
 import Error from './UI/Error'
-import { useState } from 'react'
+import { useLayoutEffect, useRef, useState } from 'react'
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa6'
+import { gsap } from 'gsap'
 
 function Characters() {
   const [currentPage, setCurrentPage] = useState(1)
-  const { isLoading, data, isError, error, isFetched } = useQuery(
+  const { status, data, error, isFetched } = useQuery(
     ['chars', currentPage], () => getCharacters(currentPage))
   let info 
   let results
@@ -16,6 +17,33 @@ function Characters() {
     info = {...data.info}
     results = [...data.results]
   }
+
+  const cardsRef = useRef(null)
+  const ctx = useRef(null)
+
+  useLayoutEffect(() => {
+    if (status === 'success') {
+      ctx.current = gsap.context(() => {
+        const cards = gsap.utils.toArray('.card')
+        cards.map((card, i) => {
+          gsap.fromTo(
+            card,
+            {
+              opacity: 0,
+              scale: 0.9
+            },
+            {
+              opacity: 1,
+              scale: 1,
+              delay: .01 + (i / 10)
+            }
+          )
+        })
+      }, cardsRef)
+      return () => ctx.current.revert()
+    }
+  }, [status])
+
   const prevPage = (e) => {
     e.preventDefault()
     if (currentPage != 1) {
@@ -29,16 +57,20 @@ function Characters() {
   return (
     <>
       {
-        isLoading && <Loading />
+        status === 'loading' && <Loading />
       }
       {
-        isError && <Error error={error} />
+        status === 'error' && <Error error={error} />
       }
-      <div className="cards">
+      <div className="cards" ref={cardsRef}>
         {
-          isFetched &&
+          status === 'success' &&
           results.map(result => (
-            <Link to={`${result.id}`} className="card" key={result.id}>
+            <Link 
+              to={`${result.id}`} 
+              className="card" 
+              key={result.id}
+            >
               <div className="card__avatar">
                 <img src={result.image} alt={result.name} />
               </div>

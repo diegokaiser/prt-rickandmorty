@@ -1,13 +1,23 @@
 body {
   background: #F5F5F5;
+  min-height: 100vh;
   margin: 0;
   padding: 0;
 }
 
+.home {
+  font-family: $nunito;
+  text-align: center;
+}
+
 .main {
+  padding: 21px 0;
   &__content {
-    margin: 0 21px;
-    padding: 21px 0;
+    margin: 0 auto;
+    width: 90%;
+    @include desktop1200 {
+      width: 1024px;
+    }
   }
 }
 
@@ -29,7 +39,10 @@ body {
   font-family: $nunito;
   padding: 21px;
   text-decoration: none;
-  width: 25%;
+  width: 100%;
+  @include desktop1200 {
+    width: 25%;
+  }
   &__avatar {
     display: flex;
     justify-content: center;
@@ -93,7 +106,10 @@ body {
   font-family: $nunito;
   padding: 14px 28px;
   text-decoration: none;
-  width: 48%;
+  width: 100%;
+  @include desktop1200 {
+    width: 48%;
+  }
   &__name {
     font-weight: 600;
   }
