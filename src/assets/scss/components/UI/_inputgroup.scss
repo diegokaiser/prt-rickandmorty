@@ -1,0 +1,47 @@
+@mixin inputgroup {
+  margin-top: 49px;
+  position: relative;
+  &:last-child {
+    margin-top: 0;
+  }
+  label {
+    font-family: $nunito;
+    font-size: 16px;
+    margin: 0 0 0 11px;
+    position: absolute;
+    user-select: none;
+    top: 11px;
+    transition: .35s ease;
+  }
+  input {
+    &[type="text"],
+    &[type="password"],
+    &[type="number"] {
+      background-color: #fff;
+      border: 1px solid #E8ECF4;
+      border-radius: 8px;
+      box-sizing: border-box;
+      height: 40px;
+      padding: 0 11px;
+      width: 100%;
+      &.error {
+        border-color: #F44336;
+      }
+    }
+  }
+  textarea {
+    border: 1px solid #E8ECF4;
+    border-radius: 8px;
+    box-sizing: border-box;
+    height: 160px;
+    padding: 11px;
+    resize: none;
+    width: 100%;
+  }
+  &.active {
+    label {
+      margin: 0;
+      top: -28px;
+    }
+  }
+}

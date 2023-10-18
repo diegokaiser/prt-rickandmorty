@@ -1,0 +1,8 @@
+@mixin badge {
+  border-radius: 3px;
+  display: inline-block;
+  font-size: 11px;
+  padding: 0.25em 0.4em;
+  text-align: center;
+  white-space: nowrap;
+}

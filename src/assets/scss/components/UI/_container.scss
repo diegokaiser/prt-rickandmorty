@@ -1,0 +1,10 @@
+@mixin container {
+  margin: 0 auto;
+  max-width: 100%;
+  @include laptop1280 {
+    max-width: 1200px;
+  }
+  @include tablet720 {
+    max-width: 85%;
+  }
+}

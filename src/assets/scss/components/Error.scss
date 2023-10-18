@@ -1,0 +1,24 @@
+.alerts {
+  height: 100%;
+  &__content {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    svg {
+      height: 35px;
+      width: auto;
+      path {
+        fill: #F44336;
+      }
+    }
+    p {
+      font-family: $nunito;
+      font-size: 14px;
+      letter-spacing: -1px;
+      line-height: 20px;
+      text-align: center;
+    }
+  }
+}

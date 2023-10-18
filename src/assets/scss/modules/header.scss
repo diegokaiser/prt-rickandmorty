@@ -1,0 +1,55 @@
+.header {
+  background: white;
+  height: 45px;
+  &__content {
+    box-sizing: border-box;
+    display: flex;
+    height: 100%;
+    width: 100%;
+  }
+  .logo {
+    background: black;
+    width: 110px;
+    a {
+      align-items: center;
+      display: flex;
+      height: 100%;
+      justify-content: center;
+      img {
+        height: 80%;
+        width: auto;
+      }
+    }
+  }
+  .nav {
+    width: 70%;
+    ul {
+      align-items: center;
+      display: flex;
+      height: 100%;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      li {
+        height: 100%;
+        a {
+          align-items: center;
+          background: white;
+          color: #333;
+          display: flex;
+          font-family: $nunito;
+          font-size: 11px;
+          font-weight: 600;
+          height: 100%;
+          padding: 0 14px;
+          text-decoration: none;
+          text-transform: uppercase;
+          &.active,
+          &:hover {
+            color: #F44336;
+          }
+        }
+      }
+    }
+  }
+}
